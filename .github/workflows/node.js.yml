@@ -50,5 +50,5 @@ jobs:
         # Use the "johnbeynon/render-deploy-action" action
         uses: johnbeynon/render-deploy-action@v0.0.8
         with:
-          service-id: SERVICE_ID
-          api-key: RENDER_API
+          service-id: ${{ secrets.SERVICE_ID }}
+          api-key: ${{ secrets.RENDER_API }}
