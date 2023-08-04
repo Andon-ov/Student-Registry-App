@@ -1,29 +1,36 @@
+# Define the name of your workflow
 name: Node.js CI
 
+# Specify when the workflow should be triggered (on push events to the "main" branch)
 on:
   push:
     branches:
       - "main"
 
+# Define the jobs for your workflow
 jobs:
+  # Define the "build" job
   build:
+    # Specify the operating system for the job
     runs-on: ubuntu-latest
 
+    # Specify the steps to be executed in the job
     steps:
-      - uses: actions/checkout@v2
+      # Step 1: Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      # Step 2: Set up Node.js 18.x environment
       - name: Use Node.js 18.x
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: 18.x
           cache: 'npm'
-
-      - name: Install Dependencies and Generate Lock File
-        run: |
-          npm install
-          # This command generates the lock file
-          npm ci
-
-      - name: Build and Test
-        run: |
-          npm run start
-          npm test
+      
+      # Step 3: Install project dependencies
+      - name: Install Dependencies
+        run: npm install
+      
+      # Step 4: Run tests
+      - name: Run Tests
+        run: npm test
